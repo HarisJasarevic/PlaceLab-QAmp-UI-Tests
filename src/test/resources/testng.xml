@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Smoke suite" verbose="1" >
+    <test name="PlaceLab Smoke test" >
+        <classes>
+            <class name="com.PlaceLab.HarisJasarevic.qamp.tests.SmokeTest" />
+        </classes>
+    </test>
+</suite>
