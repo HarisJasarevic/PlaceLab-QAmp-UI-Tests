@@ -43,21 +43,19 @@
     <build>
         <plugins>
             <plugin>
-                <!-- Build an executable JAR -->
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.3.0</version>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
                 <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.HarisJasarevic.qamp.Main</mainClass>
-                        </manifest>
-                    </archive>
+                    <includes>
+                        <include>**/SmokeTest.java</include>
+                        <include>**/LoginTestWithInvalidCredentials.java</include>
+                        <include>**/LoginTestWithInvalidEmail.java</include>
+                        <include>**/LoginTestWithInvalidPassword.java</include>
+                        <include>**/LoginAndCheckReport.java</include>
+                    </includes>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
 </project>
