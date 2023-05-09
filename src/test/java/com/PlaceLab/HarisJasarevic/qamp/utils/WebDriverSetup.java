@@ -8,13 +8,12 @@ import org.openqa.selenium.edge.EdgeDriver;
 public class WebDriverSetup {
 
     public static WebDriver getWebDriver (final String browserName) {
-        switch (browserName.toLowerCase()) {
-            case "chrome":
-                return getChromeDriver();
-            case "edge":
-                return getEdgeDriver();
-            default:
-                throw new IllegalArgumentException("Match case not found for browser name: " + browserName);
+        if (browserName.equals("chrome")) {
+            return getChromeDriver();
+        } else if (browserName.equals("edge")) {
+            return getEdgeDriver();
+        } else {
+            throw new IllegalArgumentException("Match case not found for browser name: " + browserName);
         }
     }
     private static WebDriver getChromeDriver() {

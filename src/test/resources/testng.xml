@@ -1,13 +1,9 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="Login test" verbose="1" >
-    <parameter name="browser" value="chrome"/>
-    <test name="PlaceLab_test" >
+<suite name="Smoke suite" verbose="1" >
+    <test name="PlaceLab Smoke test" >
         <classes>
             <class name="com.PlaceLab.HarisJasarevic.qamp.tests.SmokeTest" />
-            <class name="com.PlaceLab.HarisJasarevic.qamp.tests.LoginTestWithInvalidCredentials" />
-            <class name="com.PlaceLab.HarisJasarevic.qamp.tests.LoginTestWithInvalidEmail" />
-            <class name="com.PlaceLab.HarisJasarevic.qamp.tests.LoginTestWithInvalidPassword" />
         </classes>
     </test>
 </suite>
