@@ -1,8 +1,6 @@
 package com.PlaceLab.HarisJasarevic.qamp.tests;
 
 import com.PlaceLab.HarisJasarevic.qamp.utils.WebDriverSetup;
-import net.bytebuddy.build.Plugin;
-import org.apache.hc.core5.reactor.Command;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
