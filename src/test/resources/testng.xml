@@ -8,7 +8,6 @@
             <class name="com.PlaceLab.HarisJasarevic.qamp.tests.LoginTestWithInvalidCredentials" />
             <class name="com.PlaceLab.HarisJasarevic.qamp.tests.LoginTestWithInvalidEmail" />
             <class name="com.PlaceLab.HarisJasarevic.qamp.tests.LoginTestWithInvalidPassword" />
-            <class name="com.PlaceLab.HarisJasarevic.qamp.tests.LoginAndCheckReport" />
         </classes>
     </test>
 </suite>

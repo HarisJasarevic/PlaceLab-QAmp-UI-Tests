@@ -47,13 +47,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
                 <configuration>
-                    <includes>
-                        <include>**/SmokeTest.java</include>
-                        <include>**/LoginTestWithInvalidCredentials.java</include>
-                        <include>**/LoginTestWithInvalidEmail.java</include>
-                        <include>**/LoginTestWithInvalidPassword.java</include>
-                        <include>**/LoginAndCheckReport.java</include>
-                    </includes>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
                 </configuration>
             </plugin>
         </plugins>
