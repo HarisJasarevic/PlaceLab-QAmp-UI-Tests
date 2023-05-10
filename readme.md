@@ -28,3 +28,10 @@ TEST AUTOMATION HOMEWORK 2.
 
 1.Automate 3-5 tests for login functionality (make good use of testNG annotations)
 2.Open PR ready for review (on the existing repository).
+
+TEST AUTOMATION HOMEWORK 3.
+
+1.Refactor the existing tests to use Page Object Model
+
+2.Automate PlaceLab Smoke Test (Create Single Place Search
+   Report)

@@ -4,10 +4,12 @@
     <parameter name="browser" value="chrome"/>
     <test name="PlaceLab_test" >
         <classes>
-            <class name="com.PlaceLab.HarisJasarevic.qamp.tests.SmokeTest" />
+            <class name="com.PlaceLab.HarisJasarevic.qamp.tests.LoginWithValidCredentials" />
             <class name="com.PlaceLab.HarisJasarevic.qamp.tests.LoginTestWithInvalidCredentials" />
             <class name="com.PlaceLab.HarisJasarevic.qamp.tests.LoginTestWithInvalidEmail" />
             <class name="com.PlaceLab.HarisJasarevic.qamp.tests.LoginTestWithInvalidPassword" />
+            <class name="com.PlaceLab.HarisJasarevic.qamp.tests.LoginTestWithEmptyCredentials" />
+            <class name="com.PlaceLab.HarisJasarevic.qamp.tests.SinglePlaceSearchReport" />
         </classes>
     </test>
 </suite>

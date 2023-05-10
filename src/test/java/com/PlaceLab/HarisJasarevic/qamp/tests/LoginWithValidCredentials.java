@@ -1,20 +1,19 @@
 package com.PlaceLab.HarisJasarevic.qamp.tests;
 
+import com.PlaceLab.HarisJasarevic.qamp.pages.HomePage;
 import com.PlaceLab.HarisJasarevic.qamp.pages.LoginPage;
 import com.PlaceLab.HarisJasarevic.qamp.utils.WebDriverSetup;
-import com.github.javafaker.Faker;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.*;
+import org.testng.asserts.SoftAssert;
 
-import java.util.UUID;
 
-public class LoginTestWithInvalidCredentials {
+public class LoginWithValidCredentials {
 
     private WebDriver driver;
-    Faker faker = new Faker();
+    private final SoftAssert softAssert = new SoftAssert();
     private LoginPage loginPage;
+    private HomePage homePage;
 
     @Parameters("browser")
     @BeforeMethod
@@ -22,35 +21,39 @@ public class LoginTestWithInvalidCredentials {
         driver = WebDriverSetup.getWebDriver(browser);
         driver.get("https://demo.placelab.com/");
         this.loginPage = new LoginPage(driver);
+        this.homePage = new HomePage(driver);
         driver.manage().window().maximize();
+        System.out.println("Opened browser: " + browser);
     }
 
-    @Test (priority = 2, description = "Validate user is unable to login with invalid credentials")
-    public void testInvalidCredentialsLogin () {
+    @Parameters( { "email", "password" } )
+    @Test (priority = 1, description = "Validate user is able to login with valid credentials")
+    public void testPositiveLogin (final String email, final String password) {
 
-        final String expectedErrorMessage = "Invalid credentials!";
+        final String expectedUserRole = "Group Admin";
 
         //Validate login page is open
         loginPage.validateLoginPageContent();
 
-        //Populate login form with invalid email and password
-        final String randomEmail = faker.internet().emailAddress().toString();
-        final String randomPassword = UUID.randomUUID().toString();
-        loginPage.enterCredentials(randomEmail, randomPassword);
+        //Populate login form
+        loginPage.enterCredentials(email, password);
         loginPage.clickSubmitLoginButton();
 
-        //Verify invalid credentials and failed login
-        loginPage.verifyInvalidCredentials();
+        //Verify user role
+        homePage.validateUserRole(expectedUserRole);
 
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+
+        //Sign out
+        homePage.signOut();
     }
 
     @AfterMethod
-    public void tearDown () {
+    public void teardown () {
         driver.close();
     }
 }
