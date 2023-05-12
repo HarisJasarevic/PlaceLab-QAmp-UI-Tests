@@ -2,16 +2,12 @@ package com.PlaceLab.HarisJasarevic.qamp.tests;
 
 import com.PlaceLab.HarisJasarevic.qamp.pages.LoginPage;
 import com.PlaceLab.HarisJasarevic.qamp.utils.WebDriverSetup;
-import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
-import java.util.UUID;
-
-public class LoginTestWithInvalidCredentials {
+public class LoginTestWithEmptyCredentials {
 
     private WebDriver driver;
-    Faker faker = new Faker();
     private LoginPage loginPage;
 
     @Parameters("browser")
@@ -23,18 +19,14 @@ public class LoginTestWithInvalidCredentials {
         driver.manage().window().maximize();
     }
 
-    @Test (priority = 2, description = "Validate user is unable to login with invalid credentials")
-    public void testInvalidCredentialsLogin () {
-
-        final String expectedErrorMessage = "Invalid credentials!";
+    @Test(priority = 5, description = "Validate user is not able to login with empty credentials")
+    public void loginWithEmptyCredentials () {
 
         //Validate login page is open
         loginPage.validateLoginPageContent();
 
-        //Populate login form with invalid email and password
-        final String randomEmail = faker.internet().emailAddress().toString();
-        final String randomPassword = UUID.randomUUID().toString();
-        loginPage.enterCredentials(randomEmail, randomPassword);
+        //Populate login form
+        loginPage.clearLoginFormInputs();
         loginPage.clickSubmitLoginButton();
 
         //Verify invalid credentials and failed login

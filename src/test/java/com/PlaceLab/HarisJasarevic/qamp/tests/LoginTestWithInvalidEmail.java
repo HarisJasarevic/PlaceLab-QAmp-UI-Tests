@@ -1,58 +1,43 @@
 package com.PlaceLab.HarisJasarevic.qamp.tests;
 
+import com.PlaceLab.HarisJasarevic.qamp.pages.LoginPage;
 import com.PlaceLab.HarisJasarevic.qamp.utils.WebDriverSetup;
-import org.openqa.selenium.By;
+import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.*;
 
 public class LoginTestWithInvalidEmail {
 
     private WebDriver driver;
+    Faker faker = new Faker();
+    private LoginPage loginPage;
 
     @Parameters("browser")
-    @BeforeTest
+    @BeforeMethod
     public void setup(@Optional("chrome") final String browser) {
         driver = WebDriverSetup.getWebDriver(browser);
         driver.get("https://demo.placelab.com/");
+        this.loginPage = new LoginPage(driver);
         driver.manage().window().maximize();
     }
 
     @Parameters("password")
-    @Test
+    @Test (priority = 3, description = "Validate user is unable to login with invalid email")
     public void testInvalidEmailLogin (final String password) {
 
-        final String actualPageTitle = driver.getTitle();
-        final String expectedPageTitle = "PlaceLab";
         final String expectedErrorMessage = "Invalid credentials!";
 
         //Validate login page is open
-        final boolean isHeaderDisplayed = driver.findElement(By.cssSelector("div#login > p.headline")).isDisplayed();
-        Assert.assertTrue(isHeaderDisplayed);
-        Assert.assertTrue(
-                driver.findElement(By.id("login_form")).isDisplayed(),
-                "Validate login form is displayed"
-        );
-        Assert.assertTrue(
-                driver.findElement(By.cssSelector("div#login > p.headline")).isDisplayed(),
-                "Validate header text is displayed"
-        );
-
-        Assert.assertEquals(actualPageTitle, expectedPageTitle);
+        loginPage.validateLoginPageContent();
 
         //Populate login form with invalid email and correct password
-        driver.findElement(By.id("email")).sendKeys("test@testmail.com");
-        driver.findElement(By.id("password")).sendKeys(password);
-        driver.findElement(By.xpath("//input[@type='submit']")).click();
+        final String randomEmail = faker.internet().emailAddress().toString();
+        loginPage.enterCredentials(randomEmail, password);
+        loginPage.clickSubmitLoginButton();
 
         //Verify invalid credentials and failed login
-        final String actualErrorMessage = driver.findElement(By.xpath("//div[@class='error-area']")).getText();
-        Assert.assertEquals(actualErrorMessage, expectedErrorMessage);
-        System.out.println("Error message is: " + actualErrorMessage);
-        Assert.assertTrue(
-                driver.findElement(By.id("login_form")).isDisplayed(),
-                "Validate login form is still displayed"
-        );
+        loginPage.verifyInvalidCredentials();
+
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -60,7 +45,7 @@ public class LoginTestWithInvalidEmail {
         }
     }
 
-    @AfterTest
+    @AfterMethod
     public void tearDown () {
         driver.close();
     }
