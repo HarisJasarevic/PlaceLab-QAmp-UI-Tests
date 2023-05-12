@@ -20,6 +20,7 @@ public class LoginPage {
     public LoginPage (final WebDriver webDriver) {
         this.driver = webDriver;
     }
+
     public void validateLoginPageContent () {
         final String actualPageTitle = driver.getTitle();
         final boolean isHeaderDisplayed = driver.findElement(LOGIN_HEADER).isDisplayed();
@@ -28,17 +29,21 @@ public class LoginPage {
         Assert.assertTrue(isHeaderDisplayed, "Validate is header text displayed");
         Assert.assertEquals(actualPageTitle, EXPECTED_PAGE_TITLE, "Validate page title is correct");
     }
+
     public void enterCredentials (final String email, final String password) {
         driver.findElement(EMAIL_INPUT).sendKeys(email);
         driver.findElement(PASSWORD_INPUT).sendKeys(password);
     }
+
     public void clearLoginFormInputs () {
         driver.findElement(EMAIL_INPUT).clear();
         driver.findElement(PASSWORD_INPUT).clear();
     }
+
     public void clickSubmitLoginButton () {
         driver.findElement(LOGIN_SUBMIT_BTN).click();
     }
+
     public void verifyInvalidCredentials () {
         final String actualErrorMessage = driver.findElement(ACTUAL_ERROR_MSG).getText();
         Assert.assertEquals(actualErrorMessage, EXPECTED_ERROR_MSG, "Validate is error message correct");

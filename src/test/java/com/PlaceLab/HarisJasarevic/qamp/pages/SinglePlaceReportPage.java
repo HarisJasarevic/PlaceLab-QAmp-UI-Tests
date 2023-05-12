@@ -5,13 +5,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import java.util.Random;
+import java.util.UUID;
+
 import static java.util.Locale.US;
 
 public class SinglePlaceReportPage {
 
     private WebDriver driver;
-    Faker faker = new Faker(US);
-    Random random = new Random();
+    final Faker faker = new Faker(US);
+    final Random random = new Random();
     private final static String EXPECTED_PAGE_TITLE = "PlaceLab - demo";
     private final static By SEARCH_HEADER = By.xpath("//div[@class='report-header']");
     private final static By REPORT_FORM = By.id("single_poi_query");
@@ -42,10 +44,11 @@ public class SinglePlaceReportPage {
         Assert.assertTrue(isHeaderDisplayed, "Validate is header displayed");
         Assert.assertTrue(isReportFormDisplayed, "Validate is report form displayed");
     }
+
     public void populateSingleSearchReportForm () {
         driver.findElement(REPORT_NAME).sendKeys("NY Report " + random.nextInt(9999));
         driver.findElement(SEARCH_FOR_PLACE).sendKeys("New York");
-        driver.findElement(PHONE_NUMBER).sendKeys(faker.phoneNumber().cellPhone());
+        driver.findElement(PHONE_NUMBER).sendKeys(faker.phoneNumber().phoneNumber());
         final boolean isCategoryButtonDisplayed = driver.findElement(CATEGORY_DROPDOWN_BTN).isDisplayed();
         Assert.assertTrue(isCategoryButtonDisplayed, "Validate is category dropdown button displayed");
         driver.findElement(CATEGORY_DROPDOWN_BTN).click();
@@ -73,7 +76,8 @@ public class SinglePlaceReportPage {
         Assert.assertTrue(isCreateBtnDisplayed, "Validate create button is visible and clickable");
         driver.findElement(CREATE_REPORT_BTN).click();
     }
-    public void reportsPageContent () {
+
+    public void validateReportsPageContent () {
         final String actualReportsPageTitle = driver.getTitle();
         final boolean isReportPageLanded = driver.findElement(LANDED_REPORTS_PAGE).isDisplayed();
         final boolean isReportPageHeaderDisplayed = driver.findElement(REPORT_PAGE_HEADER).isDisplayed();

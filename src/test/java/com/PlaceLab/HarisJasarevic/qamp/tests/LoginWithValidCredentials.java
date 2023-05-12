@@ -5,13 +5,11 @@ import com.PlaceLab.HarisJasarevic.qamp.pages.LoginPage;
 import com.PlaceLab.HarisJasarevic.qamp.utils.WebDriverSetup;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
-import org.testng.asserts.SoftAssert;
 
 
 public class LoginWithValidCredentials {
 
     private WebDriver driver;
-    private final SoftAssert softAssert = new SoftAssert();
     private LoginPage loginPage;
     private HomePage homePage;
 
@@ -23,7 +21,6 @@ public class LoginWithValidCredentials {
         this.loginPage = new LoginPage(driver);
         this.homePage = new HomePage(driver);
         driver.manage().window().maximize();
-        System.out.println("Opened browser: " + browser);
     }
 
     @Parameters( { "email", "password" } )

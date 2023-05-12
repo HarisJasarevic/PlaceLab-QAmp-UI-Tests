@@ -21,13 +21,15 @@ public class HomePage {
         final String actualAdminUserRole = driver.findElement(USER_ROLE).getText();
         Assert.assertEquals(actualAdminUserRole, expectedUserRole, "Validate user role for the logged in user");
     }
+
     public void signOut () {
         Assert.assertTrue(driver.findElement(DROPDOWN_BTN).isDisplayed(), "Validate dropdown button is displayed");
         driver.findElement(DROPDOWN_BTN).click();
         Assert.assertTrue(driver.findElement(SIGN_OUT_BTN).isDisplayed(), "Validate sign out button is displayed");
         driver.findElement(SIGN_OUT_BTN).click();
     }
-    public void createMenu () {
+
+    public void navigationCreateReportMenu () {
         Assert.assertTrue(driver.findElement(CREATE_MENU_DROPDOWN).isDisplayed(), "Validate create menu dropdown is displayed");
         driver.findElement(CREATE_MENU_DROPDOWN).click();
         try {

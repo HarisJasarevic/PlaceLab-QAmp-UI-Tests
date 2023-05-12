@@ -2,9 +2,7 @@ package com.PlaceLab.HarisJasarevic.qamp.tests;
 
 import com.PlaceLab.HarisJasarevic.qamp.pages.LoginPage;
 import com.PlaceLab.HarisJasarevic.qamp.utils.WebDriverSetup;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.util.UUID;
@@ -26,8 +24,6 @@ public class LoginTestWithInvalidPassword {
     @Parameters("email")
     @Test (priority = 4, description = "Validate user is unable to login with invalid password")
     public void testInvalidPasswordLogin (final String email) {
-
-        final String expectedErrorMessage = "Invalid credentials!";
 
         //Validate login page is open
         loginPage.validateLoginPageContent();

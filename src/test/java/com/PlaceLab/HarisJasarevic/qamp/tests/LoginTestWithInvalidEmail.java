@@ -3,9 +3,7 @@ package com.PlaceLab.HarisJasarevic.qamp.tests;
 import com.PlaceLab.HarisJasarevic.qamp.pages.LoginPage;
 import com.PlaceLab.HarisJasarevic.qamp.utils.WebDriverSetup;
 import com.github.javafaker.Faker;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.*;
 
 public class LoginTestWithInvalidEmail {

@@ -26,7 +26,7 @@ public class SinglePlaceSearchReport {
     }
 
     @Parameters( { "email", "password" } )
-    @Test(priority = 6, description = "Validate user is able to login with valid credentials")
+    @Test(priority = 6, description = "Login with valid credentials and create Single place report")
     public void singlePlaceSearchReport (final String email, final String password) {
 
         final String expectedUserRole = "Group Admin";
@@ -42,7 +42,7 @@ public class SinglePlaceSearchReport {
         homePage.validateUserRole(expectedUserRole);
 
         //Validate create menu is displayed and enter single place search
-        homePage.createMenu();
+        homePage.navigationCreateReportMenu();
 
         //Validate single search report page content
         singlePlaceReportPage.validateSingleSearchReportContent();
@@ -51,8 +51,9 @@ public class SinglePlaceSearchReport {
         singlePlaceReportPage.populateSingleSearchReportForm();
 
         //Validate Reports page content
-        singlePlaceReportPage.reportsPageContent();
+        singlePlaceReportPage.validateReportsPageContent();
     }
+
     @AfterMethod
     public void tearDown () {
         driver.close();
