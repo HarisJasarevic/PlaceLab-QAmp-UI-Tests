@@ -2,10 +2,14 @@ package com.PlaceLab.HarisJasarevic.qamp.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import java.time.Duration;
 
-public class HomePage {
+public class NavigationPage {
 
+    private static WebDriverWait wait;
     private final WebDriver driver;
     private final static By USER_ROLE = By.id("user-role");
     private final static By DROPDOWN_BTN = By.cssSelector("#user-name > i");
@@ -13,8 +17,9 @@ public class HomePage {
     private final static By CREATE_MENU_DROPDOWN = By.id("create-menu");
     private final static By SINGLE_PLACE_SEARCH_BTN = By.id("singleplacesearch");
 
-    public HomePage (final WebDriver webDriver) {
+    public NavigationPage(final WebDriver webDriver) {
         this.driver = webDriver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     public void validateUserRole (final String expectedUserRole) {
@@ -32,11 +37,7 @@ public class HomePage {
     public void navigationCreateReportMenu () {
         Assert.assertTrue(driver.findElement(CREATE_MENU_DROPDOWN).isDisplayed(), "Validate create menu dropdown is displayed");
         driver.findElement(CREATE_MENU_DROPDOWN).click();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(SINGLE_PLACE_SEARCH_BTN)));
         Assert.assertTrue(driver.findElement(SINGLE_PLACE_SEARCH_BTN).isDisplayed(), "Validate single place search button is displayed");
         driver.findElement(SINGLE_PLACE_SEARCH_BTN).click();
     }

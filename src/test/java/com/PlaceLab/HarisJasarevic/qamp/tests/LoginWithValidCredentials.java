@@ -1,25 +1,20 @@
 package com.PlaceLab.HarisJasarevic.qamp.tests;
 
-import com.PlaceLab.HarisJasarevic.qamp.pages.HomePage;
+import com.PlaceLab.HarisJasarevic.qamp.pages.NavigationPage;
 import com.PlaceLab.HarisJasarevic.qamp.pages.LoginPage;
-import com.PlaceLab.HarisJasarevic.qamp.utils.WebDriverSetup;
-import org.openqa.selenium.WebDriver;
+import com.PlaceLab.HarisJasarevic.qamp.utils.BaseTest;
 import org.testng.annotations.*;
 
+public class LoginWithValidCredentials extends BaseTest {
 
-public class LoginWithValidCredentials {
-
-    private WebDriver driver;
     private LoginPage loginPage;
-    private HomePage homePage;
+    private NavigationPage navigationPage;
 
     @Parameters("browser")
-    @BeforeMethod
-    public void setup(@Optional("chrome") final String browser) {
-        driver = WebDriverSetup.getWebDriver(browser);
-        driver.get("https://demo.placelab.com/");
+    @BeforeMethod (alwaysRun = true)
+    public void initPages() {
         this.loginPage = new LoginPage(driver);
-        this.homePage = new HomePage(driver);
+        this.navigationPage = new NavigationPage(driver);
         driver.manage().window().maximize();
     }
 
@@ -37,20 +32,9 @@ public class LoginWithValidCredentials {
         loginPage.clickSubmitLoginButton();
 
         //Verify user role
-        homePage.validateUserRole(expectedUserRole);
-
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        navigationPage.validateUserRole(expectedUserRole);
 
         //Sign out
-        homePage.signOut();
-    }
-
-    @AfterMethod
-    public void teardown () {
-        driver.close();
+        navigationPage.signOut();
     }
 }
