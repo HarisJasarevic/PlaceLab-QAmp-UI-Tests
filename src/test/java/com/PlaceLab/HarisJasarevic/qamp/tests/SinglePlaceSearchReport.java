@@ -54,7 +54,8 @@ public class SinglePlaceSearchReport extends BaseTest {
         queriesPage.validateQueriesPageIsOpen();
 
         //Delete created report
-        singlePlaceReportPage.deleteReport("reportID");
+        final String reportID = singlePlaceReportPage.populateSingleSearchReportForm();
+        singlePlaceReportPage.deleteReport(reportID);
 
 
     }
