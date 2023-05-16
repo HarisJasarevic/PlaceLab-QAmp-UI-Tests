@@ -1,22 +1,19 @@
 package com.PlaceLab.HarisJasarevic.qamp.tests;
 
 import com.PlaceLab.HarisJasarevic.qamp.pages.LoginPage;
+import com.PlaceLab.HarisJasarevic.qamp.utils.BaseTest;
 import com.PlaceLab.HarisJasarevic.qamp.utils.WebDriverSetup;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
-
 import java.util.UUID;
 
-public class LoginTestWithInvalidPassword {
+public class LoginTestWithInvalidPassword extends BaseTest {
 
-    private WebDriver driver;
     private LoginPage loginPage;
 
     @Parameters("browser")
-    @BeforeMethod
-    public void setup(@Optional("chrome") final String browser) {
-        driver = WebDriverSetup.getWebDriver(browser);
-        driver.get("https://demo.placelab.com/");
+    @BeforeMethod (alwaysRun = true)
+    public void initPages () {
         this.loginPage = new LoginPage(driver);
         driver.manage().window().maximize();
     }
@@ -35,16 +32,5 @@ public class LoginTestWithInvalidPassword {
 
         //Verify invalid credentials and failed login
         loginPage.verifyInvalidCredentials();
-
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @AfterMethod
-    public void tearDown () {
-        driver.close();
     }
 }

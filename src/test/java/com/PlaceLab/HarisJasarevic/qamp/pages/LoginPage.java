@@ -16,13 +16,15 @@ public class LoginPage {
     private final static String EXPECTED_ERROR_MSG = "Invalid credentials!";
 
     private final WebDriver driver;
+    private BasePage basePage;
 
     public LoginPage (final WebDriver webDriver) {
         this.driver = webDriver;
+        this.basePage = new BasePage(driver);
     }
 
     public void validateLoginPageContent () {
-        final String actualPageTitle = driver.getTitle();
+        final String actualPageTitle = basePage.getPageTitle();
         final boolean isHeaderDisplayed = driver.findElement(LOGIN_HEADER).isDisplayed();
         final boolean isLoginFormDisplayed = driver.findElement(LOGIN_FORM).isDisplayed();
         Assert.assertTrue(isLoginFormDisplayed, "Validate is login form displayed");
